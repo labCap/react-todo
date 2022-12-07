@@ -15,6 +15,7 @@
   width: 100%;
   padding: 0 15px;
   margin: 0 auto;
+  position: relative;
 }
 
 // ====================================================
@@ -31,7 +32,7 @@
     // height: 30px;
 
     input {
-      width: 80%;
+      width: 93%;
       height: 40px;
       box-shadow: 5px 5px 0px 0px lightgrey;
       border-radius: 10px;
@@ -96,11 +97,26 @@
         }
       }
     }
+
+    @media (max-width: 768px) {
+      position: fixed;
+      justify-content: space-between;
+      padding: 0 20px 0 0;
+      gap: 7px;
+      width: 100%;
+      bottom: 30px;
+      left: 5px;
+    }
   }
 
   &__list {
     font-size: 18px;
     line-height: 25px;
+    display: flex;
+    flex-direction: column-reverse;
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
   }
 
   &__item {
@@ -110,17 +126,58 @@
     justify-content: space-between;
     gap: 30px;
 
-    i {
-      // width: 30px;
-      transition: all 0.3s ease-in-out;
-      cursor: pointer;
-      &:hover {
-        color: tomato;
+    .text {
+      position: relative;
+
+      &.strike {
+        &::before {
+          width: 100%;
+        }
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        width: 0;
+        height: 3px;
+        background-color: lightgray;
+        transition: all 0.2s ease-in-out;
       }
     }
 
-    &:not(:first-child) {
-      border-top: 1px solid lightgrey;
+    .remove-btn {
+      i {
+        // width: 30px;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+        &:hover {
+          color: tomato;
+        }
+      }
     }
+
+    &:not(:last-child) {
+      border-top: 1px solid lightgrey;
+      @media (max-width: 768px) {
+        border-top: none;
+        border-bottom: 1px solid lightgrey;
+      }
+    }
+  }
+}
+
+.complete-btn {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  border: 3px solid lightgrey;
+  background-color: transparent;
+  transition: all 0.3s ease-in-out;
+
+  &.complete {
+    background-color: lightgrey;
   }
 }
